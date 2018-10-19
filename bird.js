@@ -4,6 +4,8 @@ var bird_img;
 
 var walls;
 
+var score=0;
+
 function setup()
 {
     var canvas=createCanvas(600,600);
@@ -29,10 +31,13 @@ function draw()
     for(var i=0;i<8;i++)
     {
         rect(walls[i].x,0,20,walls[i].y);
-        rect(walls[i].x,walls[i].z,20,600);
+        rect(walls[i].x,walls[i].z,20,300);
     }
+    death();
+    score_check();
     update();
     wallclear();
+    document.getElementById("score").innerHTML=score;
 }
 
 function keyPressed()
@@ -63,9 +68,31 @@ function wallclear()
 {
     for(var i=0;i<8;i++)
     {
-        if(walls[i].x<0)
+        if(walls[i].x<bird.x-20)
         {
             walls[i].x=random(670,750);
+        }
+    }
+}
+
+function score_check()
+{
+    for(var i=0;i<8;i++)
+    {
+        if(walls[i].x<bird.x-18)
+        {
+            score++;
+        }
+    }
+}
+
+function death()
+{
+    for(var i=0;i<8;i++)
+    {
+        if((bird.x==walls[i].x)&&(bird.y<walls[i].y||bird.y>walls[i].z))
+        {
+            alert("Game Ended!");
         }
     }
 }
