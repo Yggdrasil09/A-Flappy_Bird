@@ -90,9 +90,10 @@ function death()
 {
     for(var i=0;i<8;i++)
     {
-        if((bird.x==walls[i].x)&&(bird.y<walls[i].y||bird.y>walls[i].z))
+        if((walls[i].x<=bird.x&&bird.x<=walls[i].x+20)&&(bird.y<=walls[i].y||bird.y>=walls[i].z))
         {
-            alert("Game Ended!");
+            score=0;
+            return ;
         }
     }
 }
